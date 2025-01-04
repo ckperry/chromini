@@ -1,0 +1,56 @@
+{
+  "manifest_version": 3,
+  "name": "Chromini - Browse with Gemini",
+  "key": "YOUR_KEY_HERE",
+  "version": "1.0",
+  "description": "Automatically summarizes webpages and allows you to ask questions about them.",
+  "permissions": [
+    "activeTab",
+    "scripting",
+    "storage",
+    "tabs",
+    "tabCapture",
+    "sidePanel"
+  ],
+  "host_permissions": [
+    "https://*/*",
+    "http://*/*"
+  ],
+  "action": {
+    "default_popup": "popup/popup.html",
+    "default_icon": {
+      "16": "images/icon16.png",
+      "48": "images/icon48.png",
+      "128": "images/icon128.png"
+    }
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>",
+        "https://docs.google.com/*",
+        "https://*.googleusercontent.com/*"
+      ],
+      "js": ["content.js"]
+    }
+  ],
+  "web_accessible_resources": [{
+    "resources": [
+      "lib/marked.min.js",
+      "content.js"
+    ],
+    "matches": ["<all_urls>"]
+  }],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "icons": {
+    "16": "images/icon16.png",
+    "48": "images/icon48.png",
+    "128": "images/icon128.png"
+  },
+  "options_page": "options/options.html",
+  "side_panel": {
+    "default_path": "popup/popup.html"
+  }
+}
